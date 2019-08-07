@@ -11,8 +11,12 @@ import DayList from "components/DayList.js";
 import InterviewerListItem from "components/InterviewerListItem.js";
 import InterviewerList from "components/InterviewerList.js";
 import Appointment from "components/Appointment/Index.js";
+import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
+import Confirm from "components/Appointment/Confirm";
+import Status from "components/Appointment/Status";
+import Error from "components/Appointment/Error";
 
   storiesOf("Button", module)
   .addParameters({
@@ -134,25 +138,35 @@ import Show from "components/Appointment/Show";
 
       storiesOf("Appointment", module) 
         .addParameters({backgrounds: [{ name: "white", value: "#fff", default: true }]
-      })
-        .add("Appointment", () => <Appointment />)
-        .add("Appointment with Time", () => <Appointment time="12pm" />)
-      
-      storiesOf("Appointment", module) 
-        .addParameters({backgrounds: [{ name: "white", value: "#fff", default: true }]
-      })
+      }).add("Appointment", () => <Appointment />)
+        .add("Appointment with Time", () => 
+          <Header time="12pm" />)
         .add("Appointment Empty", () => <Empty onAdd={action("onAdd")} />)
-      storiesOf("Appointment", module) 
-        .addParameters({backgrounds: [{ name: "white", value: "#fff", default: true }]
-      })
         .add("Appointment Show", () => 
-        <Show 
-          student={"Lydia Miller-Jones"}
-          interviewer={interviewer}
-          onEdit={action("onEdit")}
-          onDelete={action("onDelete")}
-      />);
-/* 
+          <Show 
+            student={"Lydia Miller-Jones"}
+            interviewer={interviewer}
+            onEdit={action("onEdit")}
+            onDelete={action("onDelete")}
+          />)
+        .add("Appointment confirm", () => 
+          <Confirm
+            message="delete Apppointment?"
+            onConfirm={action("onConfirm")}
+            onCancel={action("onCancel")}
+          />)
+      
+        .add("Appointment Deleting", () => 
+          <Status
+            message="Deleting"
+          />)
+        .add("Appointment Error", () =>  
+          <Error
+            message="Could not delete appointment "
+            onClose={action("onClose")}
+          />)
+   
+      /* 
 //import form from .......
       .add("create"), () => (
         <Form 
