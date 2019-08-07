@@ -11,6 +11,8 @@ import DayList from "components/DayList.js";
 import InterviewerListItem from "components/InterviewerListItem.js";
 import InterviewerList from "components/InterviewerList.js";
 import Appointment from "components/Appointment/Index.js";
+import Empty from "components/Appointment/Empty";
+import Show from "components/Appointment/Show";
 
   storiesOf("Button", module)
   .addParameters({
@@ -130,17 +132,26 @@ import Appointment from "components/Appointment/Index.js";
         ));
 
 
-        storiesOf("Appointment", module) 
+      storiesOf("Appointment", module) 
         .addParameters({backgrounds: [{ name: "white", value: "#fff", default: true }]
       })
-      .add("Appointment", () => <Appointment />)
-      .add("Appointment with Time", () => <Appointment time="12pm" />)
-      .add("Appointment Empty", () => 
-      <Appointment 
-        onAdd={action("onAdd")}
-        Appointment/>);
-
-
+        .add("Appointment", () => <Appointment />)
+        .add("Appointment with Time", () => <Appointment time="12pm" />)
+      
+      storiesOf("Appointment", module) 
+        .addParameters({backgrounds: [{ name: "white", value: "#fff", default: true }]
+      })
+        .add("Appointment Empty", () => <Empty onAdd={action("onAdd")} />)
+      storiesOf("Appointment", module) 
+        .addParameters({backgrounds: [{ name: "white", value: "#fff", default: true }]
+      })
+        .add("Appointment Show", () => 
+        <Show 
+          student={"Lydia Miller-Jones"}
+          interviewer={interviewer}
+          onEdit={action("onEdit")}
+          onDelete={action("onDelete")}
+      />);
 /* 
 //import form from .......
       .add("create"), () => (
