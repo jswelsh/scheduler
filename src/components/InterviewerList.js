@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "components/InterviewerList.scss"
 import InterviewerListItem from "./InterviewerListItem";
 
@@ -11,14 +11,16 @@ return (
     <ul class="interviewers__list">
     {props.interviewers.map((interviewer) => {
       return(
+        /* className={(interviewer.id === props.interviewer) &&"interviewers__item--selected"} */
         <li>
           <InterviewerListItem 
-   /*          id={interviewer.id} */
             name={interviewer.name}
             avatar={interviewer.avatar}
-            selected={props.interviewer===interviewer.id} 
-            setInterviewer={(event) => props.setInterviewer(interviewer.id)}
-            /* {() => props.setInterviewer(interviewer.name)} */
+            id={interviewer.id}
+            interviewer={props.interviewer}
+            /* selected={props.interviewer===interviewer.id}  */
+            /* setInterviewer={props.setInterviewer}/* () => props.onChange(props.id)} */ 
+            onChange={props.onChange}/* props.setInterviewer}*/
           />
         </li>
       )
