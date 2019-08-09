@@ -6,9 +6,9 @@ import InterviewerListItem from "./InterviewerListItem";
 export default function InterviewerList(props){
 /* const [interviewer, setInterviewer] = useState(0); */
 return (
-  <section class="interviewers">
-    <h4 class="interviewers__header text--light">Interviewer</h4>
-    <ul class="interviewers__list">
+  <section className="interviewers">
+    <h4 className="interviewers__header text--light">Interviewer</h4>
+    <ul className="interviewers__list">
     {props.interviewers.map((interviewer) => {
       return(
         /* className={(interviewer.id === props.interviewer) &&"interviewers__item--selected"} */

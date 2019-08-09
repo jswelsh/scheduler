@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import DayList from "components/DayList";
 
 import "components/Application.scss";
@@ -52,12 +52,33 @@ const appointments = [
     }
   }
 ];
-
+/* 
+ const [likes, setLikes] = useState(0);
+  useEffect(() => {
+    document.body.className = `bg--${likes % 2}`;
+    if (likes > 0) {
+      const timeout = setTimeout(() => setLikes(prev => prev - 1), 1000);
+      return () => clearInterval(timeout);
+    }
+  }, [likes]);
+*/
 export default function Application(props) {
-  const [days, setDays] = useState([]);
-  const [day, setDay] = useState("Monday");
+/*   const [days, setDays] = useState([]);
+  const [day, setDay] = useState("Monday"); */
+
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {}
+  });
+  const setDay = day => setState({ ...state, day });
+  const setDays = days => setState({ ...state, days });
+  
+ /*  useEffect(() => {return () => clearInterval()},) */
+ 
+  //setState(prev => ({ ...prev, days }));
+
   return (
-    
     
     <main className="layout">
       <section className="sidebar">
@@ -72,9 +93,9 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu" />
         <DayList
-          days={days}
-          day={day}
-          setDay={(day)=>setDay(day)}
+          days={state.days}
+          day={state.day}
+          setDay={setDay}/* (day)=>setState(day) */
         />
         <img
           className="sidebar__lhl sidebar--centered"
