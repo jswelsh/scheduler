@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -74,11 +74,7 @@ import Form from "components/Form"
     .add("Tuesday", () => (
       <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
     ));
-    const interviewer = {
-      id: 1,
-      name: "Sylvia Palmer",
-      avatar: "https://i.imgur.com/LpaY82x.png"
-    };
+
     
     storiesOf("InterviewerListItem", module)
       .addParameters({
@@ -185,3 +181,29 @@ import Form from "components/Form"
         onCancel={action("onCancel")}
         />
       ))
+      const interviewer = {
+        id: 1,
+        name: "Sylvia Palmer",
+        avatar: "https://i.imgur.com/LpaY82x.png"
+      };
+      storiesOf("Appointment booking", module) 
+      .addParameters({backgrounds: [{ name: "white", value: "#fff", default: true }]    
+    }).add("Appointment Empty", () => (
+        <Fragment>
+          <Appointment id={1} time="12pm" />
+          <Appointment id="last" time="1pm" />
+        </Fragment>
+      )).add("Appointment Booked", () => (
+        <Fragment>
+          <Appointment
+            id={1}
+            time="12pm"
+            interview={{ student: "Lydia Miller-Jones", interviewer }}
+          />
+          <Appointment id="last" time="1pm" />
+        </Fragment>
+      ))
+/*       student={"Lydia Miller-Jones"}
+      interviewer={interviewer}
+      onEdit={action("onEdit")}
+      onDelete={action("onDelete")} */
