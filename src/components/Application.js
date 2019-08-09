@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect  } from "react";
+import axios from 'axios';
 import DayList from "components/DayList";
 
 import "components/Application.scss";
@@ -73,8 +74,22 @@ export default function Application(props) {
   });
   const setDay = day => setState({ ...state, day });
   const setDays = days => setState({ ...state, days });
-  
- /*  useEffect(() => {return () => clearInterval()},) */
+
+
+  /* 
+    const state = { day: "Monday", days: [] }; setting state to update
+    setState({ ...state, day: "Tuesday" });  updating state totuesday but keeping days the same
+    */
+    useEffect(()=>{
+      axios.get('api/days')
+      .then((response)=>{setDays(response.data)})}
+      ,[])
+
+
+
+     /* useEffect(() => {return (
+
+     ) => clearInterval()},[]) */
  
   //setState(prev => ({ ...prev, days }));
 
@@ -112,3 +127,40 @@ export default function Application(props) {
     </main>
   );
 }
+
+/* 
+axios.get("/api/appointments").then((response) => {
+  console.log(response);
+}); */
+
+
+
+  /*
+axios.get(url[, config])
+axios.post(url[, config])
+axios.put(url[, config])
+axios.delete(url[, config]) */
+
+/* axios
+  .put(`/api/appointments/2`, {
+    id: 2,
+    time: "1pm",
+    interview: {
+      student: "Archie Cohen",
+      interviewer: 9,
+    },
+  })
+  .then((response) => {
+    console.log(response);
+  });
+
+  axios
+  .get("/api/appointments")
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error.response.status);
+    console.log(error.response.headers);
+    console.log(error.response.data);
+  }); */
