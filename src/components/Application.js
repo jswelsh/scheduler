@@ -8,7 +8,6 @@ import Appointment from "./Appointment/Index";
 
 export default function Application(props) {
 
-
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -28,18 +27,12 @@ export default function Application(props) {
    Promise.all([getDays, getAppointments, getInterviewers]
     
   ).then(all => {
-    // setDays(all[0]['data']); // first
-    // setAppointments(getAppointmentsForDay(all[1]['data'],all[0]['data'], state.day));
     setState((prev)=>({
        ...prev, 
-       days:all[0].data,
+      days:all[0].data,
       appointments: all[1].data,
       interviewers:all[2].data 
     }));
-/*       days: all [0]['data']
-      appointments = (getAppointmentsForDay(all[1]['data'],all[0]['data'], state.day)), */
-      
-   
   });
  },[])
 
@@ -48,19 +41,19 @@ export default function Application(props) {
     <main className="layout">
       <section className="sidebar">
         {
-          
-          <React.Fragment>
+        <React.Fragment>
           <img
           className="sidebar--centered"
           src="images/logo.png"
           alt="Interview Scheduler"
         />
+
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu" />
         <DayList
           days={state.days}
           day={state.day}
-          setDay={setDay}/* (day)=>setState(day) */
+          setDay={setDay}
         />
         <img
           className="sidebar__lhl sidebar--centered"
@@ -71,8 +64,11 @@ export default function Application(props) {
         }
       </section>
       <section className="schedule">
-        {console.log(state.appointments, "bill")}
-      {getAppointmentsForDay(state.appointments,state.days,state.day).map(appointment => <Appointment {...appointment} />)}
+      {getAppointmentsForDay(state.appointments, state.days, state.day)
+        .map(appointment => 
+        <Appointment {
+          ...appointment} 
+        />)}
       </section>
     </main>
   );
