@@ -1,7 +1,8 @@
 import React, { useState, useEffect  } from "react";
 import axios from 'axios';
 import DayList from "components/DayList";
-import getAppointmentsForDay from "helpers/selectors.js";
+import {getAppointmentsForDay, getInterview} from "helpers/selectors.js";
+/* import getInterview from "helpers/selectors.js"; */
 import "components/Application.scss";
 import Appointment from "./Appointment/Index";
 
@@ -11,30 +12,45 @@ export default function Application(props) {
     day: "Monday",
     days: [],
     appointments: {},
-    Interviewers: {}
+    interviewers:  {}
   });
 
-  const setDay = day => setState({ ...state, day });
-  const setDays = days => setState({ ...state, days });
-  const setAppointments = appointments => setState({ ...state, appointments });
+/*   const setDay = day => setState({ ...state, day }); */
+/*   const setDays = days => setState({ ...state, days });*/
+/*     const setAppointments = appointments => setState({ ...state, appointments });  */
 /*   const setInterviewers = Interviewers => setState({ ...state, Interviewers }); */
   const getDays = axios.get('api/days')
   const getAppointments = axios.get('api/appointments')
   const getInterviewers = axios.get('api/interviewers')
    useEffect(()=>{
 
-   Promise.all([getDays, getAppointments, getInterviewers]
-    
-  ).then(all => {
-    setState((prev)=>({
+   Promise.all([getDays, getAppointments, getInterviewers])
+   .then(all => {
+    console.log(all[0].data, "delta")
+    setState((prev)=>({ 
        ...prev, 
       days:all[0].data,
       appointments: all[1].data,
       interviewers:all[2].data 
     }));
   });
+  // eslint-disable-next-line
  },[])
 
+    const appointments = getAppointmentsForDay(state, state.day);
+    console.log(appointments, "golf")
+    const schedule = appointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    console.log(state.appointments["3"].interview, "helix");
+      return (
+        <Appointment
+          key={appointment.id}
+          id={appointment.id}
+          time={appointment.time}
+          interview={interview}
+        />
+      );
+    });
   return (
     
     <main className="layout">
@@ -50,9 +66,10 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu" />
         <DayList
-          days={state.days}
-          day={state.day}
-          setDay={setDay}
+         days={state.days}
+         day={state.day}
+         setDay={useEffect(()=>{setState((prev)=>({ ...prev, days: state.days }))},[state.days])}
+         /* setDay */
         />
         <img
           className="sidebar__lhl sidebar--centered"
@@ -60,16 +77,20 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
         </React.Fragment>
-        }
+        }   
       </section>
       <section className="schedule">
-      {getAppointmentsForDay(state.appointments, state.days, state.day)
-        .map(appointment => 
-        <Appointment {
-          ...appointment} 
-        />)}
+        {schedule}
       </section>
     </main>
   );
 }
-  
+/*  
+          console.log(state, "zulu")}
+        {getAppointmentsForDay(state, state.day) 
+          .map(appointment => 
+            <Appointment {
+            ...appointment}  )
+/>
+*/  
+/* state.appointments, state.days, state.day */
