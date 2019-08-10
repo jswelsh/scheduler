@@ -1,17 +1,17 @@
-export function getAppointmentsForDay(state, day) {
-  
-  let AppointmentsForDay;
-  
-  state.days.forEach(elt => {
-    if(elt.name === day){
-      AppointmentsForDay = elt.appointments;
-    }
-  }   
-  )
-  if(!AppointmentsForDay){
-    return []
-   }
-  let hold = AppointmentsForDay.map(x => state.appointments[x])
+export default function getAppointmentsForDay(appointments, days , day) {
+  let appointmentsArray;
+  let keys = Object.keys(days)
+  let appointmentsForDay= []
+    keys.forEach(elt => {
 
-return hold;
+        if(days[parseInt(elt)].name === day){
+          console.log(days[parseInt(elt)].appointments)
+          appointmentsArray = (days[parseInt(elt)].appointments);
+          appointmentsArray.forEach(elt => { 
+            appointmentsForDay.push(appointments[elt])
+          });    
+        }
+  });
+  console.log(appointmentsForDay);
+  return appointmentsForDay
 }

@@ -17,7 +17,7 @@ export default function Appointment(props){
     )
   }
 } */
-  console.log("test",props)
+/*   console.log("test",props) */
   return (
   <article className="appointment">
   <Header
