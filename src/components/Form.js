@@ -1,10 +1,7 @@
 import React, { useState }  from "react";
 import Button from "components/Button";
 import InterviewerList from "./InterviewerList";
-/* 
-name:String
-interviewer:Number
-*/
+
 export default function Form(props){
 
 /*   funtion (){
@@ -13,7 +10,7 @@ export default function Form(props){
 const [name, setName] = useState(props.name || "");
 const [interviewer, setInterviewer] = useState(props.interviewer || 0);
 const Cancel = { danger:"danger",children:"Cancel", onClick: props.onCancel}
-const Confirm = { confirm:"confirm", children:"Save", onClick: () => props.onSave(name, interviewer)}/* () => (setInterviewer(interviewer.id) (()=> props.onSave )) (name, interviewer)}*/
+const Confirm = { confirm:"confirm", children:"Save", onClick: () => props.onSave(name, interviewer)}
 return (
 
   <main className="appointment__card appointment__card--create">
@@ -32,8 +29,8 @@ return (
     </section>
     <section className="appointment__card-right">
       <section className="appointment__actions">
-      {Button(Cancel)}{/* <Button danger>Cancel</Button> */}
-      {Button(Confirm)}{/* <Button confirm onClick{() => props.onSave(name, interviewer)}>Save</Button> */}
+      {Button(Cancel)}
+      {Button(Confirm)}
       </section>
     </section>
   </main>
