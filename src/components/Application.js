@@ -15,7 +15,7 @@ export default function Application(props) {
     interviewers:  {}
   });
 
-/*   const setDay = day => setState({ ...state, day }); */
+  const setDay = () => {setState((prev)=>({ ...prev, days: state.days }))}/* day => setState({ ...state, day }); */
 /*   const setDays = days => setState({ ...state, days });*/
 /*     const setAppointments = appointments => setState({ ...state, appointments });  */
 /*   const setInterviewers = Interviewers => setState({ ...state, Interviewers }); */
@@ -65,7 +65,7 @@ export default function Application(props) {
         <DayList
          days={state.days}
          day={state.day}
-         setDay={useEffect(()=>{setState((prev)=>({ ...prev, days: state.days }))},[])}
+         setDay={setDay}
          /* useEffect(()=>{setState((prev)=>({ ...prev, days: state.days }))},[state.days])*/
         />
         <img

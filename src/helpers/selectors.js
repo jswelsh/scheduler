@@ -13,7 +13,7 @@
     }
     let hold = appointmentsForDay.map(x =>state.appointments[x])
 
-return hold;
+  return hold;
   }
 
   export function getInterview(state, interview) {
@@ -22,4 +22,9 @@ return hold;
     }
     let hold = {...interview, interviewer:state.interviewers[interview.interviewer]}
     return hold
+  }
+
+  export function getInterviewersForDay() {
+
+    return
   }
