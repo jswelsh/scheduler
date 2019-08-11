@@ -9,7 +9,7 @@ import Appointment from "./Appointment/Index";
 export default function Application(props) {
 
   const [state, setState] = useState({
-    day: "Monday",
+    day: "Wednesday",
     days: [],
     appointments: {},
     interviewers:  {}
@@ -26,7 +26,6 @@ export default function Application(props) {
 
    Promise.all([getDays, getAppointments, getInterviewers])
    .then(all => {
-    console.log(all[0].data, "delta")
     setState((prev)=>({ 
        ...prev, 
       days:all[0].data,
@@ -38,10 +37,8 @@ export default function Application(props) {
  },[])
 
     const appointments = getAppointmentsForDay(state, state.day);
-    console.log(appointments, "golf")
     const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-    console.log(state.appointments["3"].interview, "helix");
       return (
         <Appointment
           key={appointment.id}
@@ -68,8 +65,8 @@ export default function Application(props) {
         <DayList
          days={state.days}
          day={state.day}
-         setDay={useEffect(()=>{setState((prev)=>({ ...prev, days: state.days }))},[state.days])}
-         /* setDay */
+         setDay={useEffect(()=>{setState((prev)=>({ ...prev, days: state.days }))},[])}
+         /* useEffect(()=>{setState((prev)=>({ ...prev, days: state.days }))},[state.days])*/
         />
         <img
           className="sidebar__lhl sidebar--centered"
