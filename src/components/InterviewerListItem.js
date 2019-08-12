@@ -10,6 +10,7 @@ export default function InterviewerListItem(props){
   })
   console.log(props.id,"god")
   return (
+    
     <div className={itemClass}>
       <img className="interviewers__item-image" 
         src={props.avatar}

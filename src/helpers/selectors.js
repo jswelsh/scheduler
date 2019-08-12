@@ -1,6 +1,6 @@
 
   export function getAppointmentsForDay(state, day) {
-/*   console.log(day) */
+
   const days = [...state.days]
   const appointments = {...state.appointments}
   const [dayObj] = days.filter(elt => elt.name == day)
@@ -23,7 +23,7 @@
 
     const days = [...state.days]
     const appointments = {...state.appointments}
-    const [dayObj]  = days.filter(elt => elt.name == day)
+    const [dayObj] = days.filter(elt => elt.name == day)
     if (days[0] && dayObj && dayObj.appointments){
       return dayObj.appointments
       .map(x =>appointments[x].interview)

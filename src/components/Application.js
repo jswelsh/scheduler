@@ -9,13 +9,13 @@ import Appointment from "./Appointment/Index";
 export default function Application(props) {
 
   const [state, setState] = useState({
-    day: "Monday",
+    day: "Wednesday",
     days: [],
     appointments: {},
     interviewers:  {}
   });
 
-  const setDay = () => {setState((prev)=>({ ...prev, days: state.days }))}/* day => setState({ ...state, day }); */
+  const setDay = ((day) => {setState((prev)=>({ ...prev, day: day }))})/* day => setState({ ...state, day }); */
   /*   const setDays = days => setState({ ...state, days });*/
 /*     const setAppointments = appointments => setState({ ...state, appointments });  */
 /*   const setInterviewers = Interviewers => setState({ ...state, Interviewers }); */
@@ -54,7 +54,7 @@ export default function Application(props) {
  */
     }
     const holdUP = {...state.interviewers}
-    const interviewers = interviewersList.map(x => holdUP[x])
+/*     const interviewers = interviewersList.map(x => holdUP[x]) */
     const schedule = appointments
 
     .map((appointment) => {
@@ -65,7 +65,7 @@ export default function Application(props) {
             id={appointment.id}
             time={appointment.time}
             interview={interview}
-            interviewers={interviewers}
+            interviewers={interviewersList.map(x => holdUP[x])}
             bookInterview={bookInterview}
           />
         );
