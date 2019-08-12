@@ -9,16 +9,13 @@ export default function InterviewerListItem(props){
     "interviewers__item-image":props.avatar
   })
   return (
-    <li className={itemClass} onClick={()=> props.onChange(props.id)}>
-      <img class="interviewers__item-image" 
+    <div className={itemClass}>
+      <img className="interviewers__item-image" 
         src={props.avatar}
         alt={props.name}
       />
-      {props.name}   
-    </li>
+    </div>   
   )
-
-
-
 }
-
+/*  </li> */
+/* <li key={props.id} className={itemClass} onClick={()=> props.onChange(props.id)}> */

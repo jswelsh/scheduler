@@ -4,9 +4,7 @@
   let appointmentsForDay;
   state.days.forEach(elt => {
     if(elt.name === day){
-    /*   console.log(elt.appointments, "123") */
       appointmentsForDay = elt.appointments;
-       /* return appointmentsForDay  */
     }})
     if(!appointmentsForDay){
       return []
@@ -24,7 +22,20 @@
     return hold
   }
 
-  export function getInterviewersForDay() {
+  export function getInterviewersForDay(state, day) {
+    let appointmentsForDay;
+    state.days.forEach(elt => {
+      if(elt.name === day){
+        appointmentsForDay = elt.appointments;
+      }})
 
-    return
+      if(!appointmentsForDay){
+        return []
+      }
+      let hold = appointmentsForDay
+        .map(x =>state.appointments[x].interview)
+        .filter(x => Boolean(x))
+        .map(x => x.interviewer)
+      console.log((hold))
+      return hold;
   }
