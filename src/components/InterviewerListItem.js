@@ -8,6 +8,7 @@ export default function InterviewerListItem(props){
     "interviewers__item--selected": selected,
     "interviewers__item-image":props.avatar
   })
+  console.log(props.id,"god")
   return (
     <div className={itemClass}>
       <img className="interviewers__item-image" 
@@ -15,6 +16,7 @@ export default function InterviewerListItem(props){
         alt={props.name}
       />
     </div>   
+   
   )
 }
 /*  </li> */

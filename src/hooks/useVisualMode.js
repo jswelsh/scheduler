@@ -27,6 +27,7 @@ export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
   
   function transition(mode, replace) {
+    console.log(mode, replace, history, "delta")
     setHistory(prev => 
       (
         replace
@@ -34,6 +35,7 @@ export default function useVisualMode(initial) {
         : [...prev, mode]
       )
     );
+    console.log(history, "echo")
   }
 
   function back() {

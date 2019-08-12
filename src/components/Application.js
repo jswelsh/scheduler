@@ -9,14 +9,14 @@ import Appointment from "./Appointment/Index";
 export default function Application(props) {
 
   const [state, setState] = useState({
-    day: "Wednesday",
+    day: "Monday",
     days: [],
     appointments: {},
     interviewers:  {}
   });
 
   const setDay = () => {setState((prev)=>({ ...prev, days: state.days }))}/* day => setState({ ...state, day }); */
-/*   const setDays = days => setState({ ...state, days });*/
+  /*   const setDays = days => setState({ ...state, days });*/
 /*     const setAppointments = appointments => setState({ ...state, appointments });  */
 /*   const setInterviewers = Interviewers => setState({ ...state, Interviewers }); */
   const getDays = axios.get('api/days')
@@ -35,14 +35,30 @@ export default function Application(props) {
   });
   // eslint-disable-next-line
  },[])
- 
     const appointments = getAppointmentsForDay(state, state.day);
     const interviewersList = getInterviewersForDay(state, state.day)
-    const interviewers = interviewersList.map(x => state.interviewers[x])
+/*     const setAppointment = (id, interview) => { console.log ( {...appointments[id], interview: {...interview}}, "yo")}
+ */
+    const bookInterview = (id, interview) => {
+/*       console.log(id, interview, "Praize Azula");
+ */      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      };
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+      setState((prev) => ({...prev, appointments }))
+/*       console.log(interviewersList.map(x => state.interviewers[x]), "dfdf")
+ */
+    }
+    const holdUP = {...state.interviewers}
+    const interviewers = interviewersList.map(x => holdUP[x])
     const schedule = appointments
+
     .map((appointment) => {
       const interview = getInterview(state, appointment.interview);
-      
         return (
           <Appointment
             key={appointment.id}
@@ -50,9 +66,12 @@ export default function Application(props) {
             time={appointment.time}
             interview={interview}
             interviewers={interviewers}
+            bookInterview={bookInterview}
           />
         );
       });
+
+   
   return (
     
     <main className="layout">
