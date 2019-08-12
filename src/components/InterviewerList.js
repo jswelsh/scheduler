@@ -4,7 +4,7 @@ import InterviewerListItem from "./InterviewerListItem";
 
 
 export default function InterviewerList(props){
-
+  console.log(props.interviewers, "jello")
   return (
   <section className="interviewers">
     <h4 className="interviewers__header text--light">Interviewers</h4>
@@ -16,7 +16,7 @@ export default function InterviewerList(props){
             name={interviewer.name}
             avatar={interviewer.avatar}
             id={interviewer.id}
-            interviewer={props.interviewer}
+            interviewer={props.interviewer}//change like daylistitem
  /*            onChange={props.onChange} */
           />
         </li>

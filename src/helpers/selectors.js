@@ -1,3 +1,4 @@
+import { stat } from "fs";
 
   export function getAppointmentsForDay(state, day) {
 
@@ -13,8 +14,7 @@
   export function getInterview(state, interview) {
     if (interview){
       const interviewers = {...state.interviewers}
-      const hold = {...interview, interviewer: interviewers[interview.interviewer]}
-      return hold
+      return {...interview, interviewer: interviewers[interview.interviewer]}
     }
     return null
   }
@@ -22,13 +22,14 @@
   export function getInterviewersForDay(state, day) {
 
     const days = [...state.days]
+    const interviewers = {...state.interviewers}
     const appointments = {...state.appointments}
     const [dayObj] = days.filter(elt => elt.name == day)
     if (days[0] && dayObj && dayObj.appointments){
       return dayObj.appointments
       .map(x =>appointments[x].interview)
       .filter(x => Boolean(x))
-      .map(x => x.interviewer)
+      .map(x => x.interviewer).map(x => interviewers[x])
     }
       return []
   }

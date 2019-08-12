@@ -1,33 +1,9 @@
 import  { useState  } from "react";
-/* 
-
-export default function useVisualMode(initial) {
-  const [history, setHistory] = useState([initial]);
-  let hold;
- 
-  return{
-  mode: history[history.length-1]
-
-  ,
-  transition: (state) => {
-    hold = [...history]
-    hold.push(state)
-    setHistory(hold);
-  },
-   back: () => {
-    hold = [...history]
-    hold.pop()
-    setHistory(hold);
-   }
-}
-}
- */
 
 export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
   
   function transition(mode, replace) {
-    console.log(mode, replace, history, "delta")
     setHistory(prev => 
       (
         replace
@@ -35,7 +11,6 @@ export default function useVisualMode(initial) {
         : [...prev, mode]
       )
     );
-    console.log(history, "echo")
   }
 
   function back() {
