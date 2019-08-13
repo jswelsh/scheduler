@@ -41,24 +41,31 @@ export default function Application(props) {
 /*     const setAppointment = (id, interview) => { console.log ( {...appointments[id], interview: {...interview}}, "yo")}
  */
     const bookInterview = (id, interview) => {
+      return axios.put(`/api/appointments/${id}`, {
+        interview: interview
+      }).then(() => {
+        const appointment = {
+          ...state.appointments[id],
+          interview: { ...interview }
+        };
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
+        console.log(appointments)
+        setState((prev) => ({...prev, appointments }))
 
-      const appointment = {
-        ...state.appointments[id],
-        interview: { ...interview }
-      };
-      const appointments = {
-        ...state.appointments,
-        [id]: appointment
-      };
-      setState((prev) => ({...prev, appointments }))
+      });
+
     }
     /* const interviewers = getInterviewersForDay(state, state.day).map(x => holdUP[x]) */
     const interviewers = getInterviewersForDay(state, state.day)
-    const appointments = getAppointmentsForDay(state, state.day)
-    const schedule = appointments
+    let appointments = getAppointmentsForDay(state, state.day)
+     let schedule = appointments
     .map((appointment) => {
       const interview = getInterview(state, appointment.interview);
-        return (
+      console.log("appointment", interview)  
+      return (
           <Appointment
             key={appointment.id}
             id={appointment.id}
