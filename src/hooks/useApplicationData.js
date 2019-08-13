@@ -12,12 +12,12 @@ export default function useApplicationData() {
 
   const setDay = ((day) => {setState((prev)=>({ ...prev, day: day }))})
 
-  const getAppointments = axios.get('api/appointments')// move axios out
-  const getInterviewers = axios.get('api/interviewers')// move axios out
+  const getAppointments = axios.get('api/appointments')
+  const getInterviewers = axios.get('api/interviewers')
   const getDays = axios.get('api/days')
 
   useEffect(()=>{
-    Promise.all([getDays, getAppointments, getInterviewers])// move axios out
+    Promise.all([getDays, getAppointments, getInterviewers])
     .then(all => {
       setState((prev)=>({ 
         ...prev, 
@@ -33,6 +33,7 @@ export default function useApplicationData() {
     return axios.put(`/api/appointments/${id}`, {
       interview: interview
     }).then(() => {
+      //redundant part can be merge
       const appointment = {
         ...state.appointments[id],
         interview: { ...interview }
@@ -41,7 +42,7 @@ export default function useApplicationData() {
         ...state.appointments,
         [id]: appointment
       };
-      setState((prev) => ({...prev, appointments }))
+      setState((prev) => ({...prev, appointments}))
     }).catch((error) => {
       setState((prev) => ({...prev}))
       return error

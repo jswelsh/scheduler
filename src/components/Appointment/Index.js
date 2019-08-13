@@ -25,28 +25,30 @@ export default function Appointment(props){
 
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY)
 
-  function save(name, interviewer) {
+  function save(student, interviewer) {
     const interview = {
-      student: name,
-      interviewer : interviewer
+      student, 
+      interviewer// changed
     };
-      transition(SAVING)
+    transition(SAVING)
+
     props
     .bookInterview(props.id, interview)
     .then((error) => {
-      !error && transition(SHOW)//can i chain?
-      transition(ERROR_SAVE, true)
+      if(error){transition(ERROR_SAVE, true)}
+      transition(SHOW)
     })
   }
 
   function remove() {
     const interview = null
-      transition(DELETING, true)
+    transition(DELETING, true)
+
     props
     .cancelInterview(props.id, interview)
     .then((error) => { 
-      !error && transition(EMPTY)//can i chain?
-      transition(ERROR_DELETE, true)
+      if(error){transition(ERROR_DELETE, true)}
+      transition(EMPTY)
     })
   }
  

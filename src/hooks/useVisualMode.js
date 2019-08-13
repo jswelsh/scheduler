@@ -3,10 +3,10 @@ import  { useState  } from "react";
 export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
   
-  function transition(mode, replace) {
+  function transition(mode, shouldReplace) {
     setHistory(prev => 
       (
-        replace
+        shouldReplace
         ? [...prev.slice(0, prev.length - 1), mode]
         : [...prev, mode]
       )
