@@ -57,7 +57,6 @@ export default function Application(props) {
     }
 
     const deleteAppointment = (id, interview) => { 
-      console.log(id, "go")
       return axios.delete(`/api/appointments/${id}`, {
         id:id
       }).then(() => {
@@ -69,7 +68,6 @@ export default function Application(props) {
           ...state.appointments,
           [id]: appointment
         };
-        console.log(appointments,"golfing")
         setState((prev) => ({...prev, appointments}))
       });
     }
