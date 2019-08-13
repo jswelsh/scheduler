@@ -1,10 +1,8 @@
 import React from "react";
 
 export default function Show(props){
+const cancelInterview = { onClick: () => props.onDelete()}
 
-/* console.log("helix", props.interviewer.id) */
-
-const del = { onClick: () => props.onDelete()}
 return(
   <main className="appointment__card appointment__card--show">
     <section className="appointment__card-left">
@@ -22,7 +20,7 @@ return(
         alt="Edit"
       />
       <img
-        onClick={del.onClick}
+        onClick={cancelInterview.onClick}
         className="appointment__actions-button"
         src="images/trash.png"
         alt="Delete"

@@ -25,7 +25,7 @@ return (
       </form>
       <InterviewerList 
         interviewers={props.interviewers} 
-        interviewer={interviewer.id} 
+        interviewer={interviewer} 
         onChange={setInterviewer}
       />
     </section>

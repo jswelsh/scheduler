@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "components/Appointment/styles.scss"
 import Header from "components/Appointment/Header";
@@ -6,6 +6,7 @@ import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Form from "components/Form"
 import Status from "components/Appointment/Status"
+import Error from "components/Appointment/Error"
 import Confirm from "components/Appointment/Confirm"
 import useVisualMode from "hooks/useVisualMode";
 
@@ -16,6 +17,8 @@ const EDIT = "EDIT"
 const SAVING = "SAVING"
 const DELETING = "DELETING"
 const CONFIRMATION = "CONFIRMATION"
+const ERROR_SAVE = "ERROR_SAVE"
+const ERROR_DELETE = "ERROR_DELETE"
 
 
 export default function Appointment(props){
@@ -27,24 +30,30 @@ export default function Appointment(props){
       student: name,
       interviewer : interviewer
     };
-    transition(SAVING)
-    props.bookInterview(props.id, interview).then(() => {
-     transition(SHOW)
+      transition(SAVING)
+    props
+    .bookInterview(props.id, interview)
+    .then((error) => {
+      !error && transition(SHOW)//can i chain?
+      transition(ERROR_SAVE, true)
     })
   }
 
   function remove() {
-    transition(DELETING)
     const interview = null
-    props.deleteAppointment(props.id, interview).then(() => { 
-      transition(EMPTY)
-  })
+      transition(DELETING, true)
+    props
+    .cancelInterview(props.id, interview)
+    .then((error) => { 
+      !error && transition(EMPTY)//can i chain?
+      transition(ERROR_DELETE, true)
+    })
   }
  
   return (
     <article className="appointment">
-    <Header
-      time={props.time}
+      <Header
+        time={props.time}
       />
     {mode === SHOW && (
       <Show
@@ -81,9 +90,14 @@ export default function Appointment(props){
     {mode === SAVING && (
       <Status message="Saving" />
     )}
-
+    {mode === ERROR_SAVE && (
+      <Error message="Error Saving" />
+    )}    
     {mode === DELETING && (
       <Status message="Deleting" />
+    )}
+    {mode === ERROR_DELETE && (
+      <Error message="Error Deleting" />
     )}
     {mode ===  CONFIRMATION && (
       <Confirm
@@ -93,7 +107,7 @@ export default function Appointment(props){
       />
     )}
 
-      </article>
+    </article>
   )
 }
 
