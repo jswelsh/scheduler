@@ -4,13 +4,11 @@ import InterviewerList from "./InterviewerList";
 
 export default function Form(props){
 
-/*   funtion (){
-    reset
-  } */
+
 const [name, setName] = useState(props.name || "");
 const [interviewer, setInterviewer] = useState(props.interviewer || 0);
 const Cancel = { danger:"danger",children:"Cancel", onClick: props.onCancel}
-const Confirm = { confirm:"confirm", children:"Save", onClick: () => props.onSave(name, interviewer)}
+const Save = { confirm:"confirm", children:"Save", onClick: () => props.onSave(name, interviewer)}
 
 return (
   <main className="appointment__card appointment__card--create">
@@ -34,7 +32,7 @@ return (
     <section className="appointment__card-right">
       <section className="appointment__actions">
       {Button(Cancel)}
-      {Button(Confirm)}
+      {Button(Save)}
       </section>
     </section>
   </main>

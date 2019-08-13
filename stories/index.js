@@ -147,8 +147,8 @@ import Form from "components/Form"
       <Show 
         student={"Lydia Miller-Jones"}
         interviewer={interviewer.name}
-/*         onEdit={action("onEdit")}
-        onDelete={action("onDelete")} */
+        onEdit={action("onEdit")}
+        onDelete={action("onDelete")}
       />)
     .add("Appointment confirm", () => 
       <Confirm

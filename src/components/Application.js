@@ -2,7 +2,6 @@ import React, { useState, useEffect  } from "react";
 import axios from 'axios';
 import DayList from "components/DayList";
 import {getAppointmentsForDay, getInterview, getInterviewersForDay} from "helpers/selectors";
-
 import "components/Application.scss";
 import Appointment from "./Appointment/Index";
 
@@ -17,12 +16,12 @@ export default function Application(props) {
 
   const setDay = ((day) => {setState((prev)=>({ ...prev, day: day }))})
 
-  
   /* const getAvbInterviewers = axios.get('api/available_interviewers') */
   const getAppointments = axios.get('api/appointments')
   const getInterviewers = axios.get('api/interviewers')
   /* const getInterviews = axios.get('api/interviews') */
   const getDays = axios.get('api/days')
+
    useEffect(()=>{
 
    Promise.all([getDays, getAppointments, getInterviewers])
@@ -40,6 +39,7 @@ export default function Application(props) {
     /* const interviewersList = getInterviewersForDay */
 /*     const setAppointment = (id, interview) => { console.log ( {...appointments[id], interview: {...interview}}, "yo")}
  */
+
     const bookInterview = (id, interview) => {
       return axios.put(`/api/appointments/${id}`, {
         interview: interview
@@ -52,13 +52,28 @@ export default function Application(props) {
           ...state.appointments,
           [id]: appointment
         };
-        console.log(appointments)
         setState((prev) => ({...prev, appointments }))
-
       });
-
     }
-    /* const interviewers = getInterviewersForDay(state, state.day).map(x => holdUP[x]) */
+
+    const deleteAppointment = (id, interview) => { 
+      console.log(id, "go")
+      return axios.delete(`/api/appointments/${id}`, {
+        id:id
+      }).then(() => {
+        const appointment = {
+          ...state.appointments[id],
+          interview: interview
+        };
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
+        console.log(appointments,"golfing")
+        setState((prev) => ({...prev, appointments}))
+      });
+    }
+
     const interviewers = getInterviewersForDay(state, state.day)
     let appointments = getAppointmentsForDay(state, state.day)
      let schedule = appointments
@@ -73,11 +88,11 @@ export default function Application(props) {
             interview={interview}
             interviewers={interviewers}
             bookInterview={bookInterview}
+            deleteAppointment={deleteAppointment}
           />
         );
       });
 
-   
   return (
     
     <main className="layout">
@@ -85,24 +100,23 @@ export default function Application(props) {
         {
         <React.Fragment>
           <img
-          className="sidebar--centered"
-          src="images/logo.png"
-          alt="Interview Scheduler"
-        />
+            className="sidebar--centered"
+            src="images/logo.png"
+            alt="Interview Scheduler"
+          />
 
-        <hr className="sidebar__separator sidebar--centered" />
-        <nav className="sidebar__menu" />
-        <DayList
-         days={state.days}
-         day={state.day}
-         setDay={setDay}
-         /* useEffect(()=>{setState((prev)=>({ ...prev, days: state.days }))},[state.days])*/
-        />
-        <img
-          className="sidebar__lhl sidebar--centered"
-          src="images/lhl.png"
-          alt="Lighthouse Labs"
-        />
+          <hr className="sidebar__separator sidebar--centered" />
+          <nav className="sidebar__menu" />
+          <DayList
+            days={state.days}
+            day={state.day}
+            setDay={setDay}
+          />
+          <img
+            className="sidebar__lhl sidebar--centered"
+            src="images/lhl.png"
+            alt="Lighthouse Labs"
+          />
         </React.Fragment>
         }   
       </section>
@@ -112,12 +126,3 @@ export default function Application(props) {
     </main>
   );
 }
-/*  
-          console.log(state, "zulu")}
-        {getAppointmentsForDay(state, state.day) 
-          .map(appointment => 
-            <Appointment {
-            ...appointment}  )
-/>
-*/  
-/* state.appointments, state.days, state.day */
