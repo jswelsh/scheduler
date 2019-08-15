@@ -30,20 +30,19 @@ export default function useApplicationData() {
   },[])
 
   function bookInterview(id, interview){
-    return axios.put(`/api/appointments/${id}`, {
-      interview: interview
-    }).then(() => {
-      //redundant part can be merge
-      const appointment = {
-        ...state.appointments[id],
-        interview: { ...interview }
-      };
-      const appointments = {
-        ...state.appointments,
-        [id]: appointment
-      };
-      setState((prev) => ({...prev, appointments}))
-    }).catch((error) => {
+    return axios
+      .put(`/api/appointments/${id}`, {interview})
+      .then(() => {
+        const appointment = {
+          ...state.appointments[id],
+          ...interview 
+        };
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
+      setState((prev) => ({...prev, appointments}))})
+      .catch((error) => {
       setState((prev) => ({...prev}))
       return error
     });
@@ -54,7 +53,7 @@ export default function useApplicationData() {
     }).then(() => {
       const appointment = {
         ...state.appointments[id],
-        interview: interview
+        ...interview
       };
       const appointments = {
         ...state.appointments,

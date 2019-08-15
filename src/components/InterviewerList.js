@@ -2,13 +2,17 @@ import React from "react";
 import "components/InterviewerList.scss"
 import InterviewerListItem from "./InterviewerListItem";
 import PropTypes from 'prop-types';
+/* 
+check that InterviewerList is being provided
+with valid values, warning in console if not
+*/
 InterviewerList.propTypes = {
-  value: PropTypes.number,
+  interviewer: PropTypes.number,
   onChange: PropTypes.func.isRequired
 };
 
 export default function InterviewerList(props){
-
+  console.log(props.value, "gili")
   return (
   <section className="interviewers">
     <h4 className="interviewers__header text--light">Interviewers</h4>
@@ -21,7 +25,7 @@ export default function InterviewerList(props){
             avatar={interviewer.avatar}
             id={interviewer.id}
             interviewer={props.interviewer}//change like daylistitem
- /*            onChange={props.onChange} */
+
           />
         </li>
       )
