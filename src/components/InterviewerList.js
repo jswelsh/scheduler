@@ -1,6 +1,6 @@
 import React from "react";
 import "components/InterviewerList.scss"
-import InterviewerListItem from "./InterviewerListItem";
+import InterviewerListItem from "components/InterviewerListItem";
 import PropTypes from 'prop-types';
 /* 
 check that InterviewerList is being provided
@@ -12,7 +12,7 @@ InterviewerList.propTypes = {
 };
 
 export default function InterviewerList(props){
-  console.log(props.value, "gili")
+
   return (
   <section className="interviewers">
     <h4 className="interviewers__header text--light">Interviewers</h4>

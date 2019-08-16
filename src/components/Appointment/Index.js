@@ -51,7 +51,7 @@ export default function Appointment(props){
       transition(EMPTY)
     })
   }
- 
+ console.log(props.interview, "helix")
   return (
     <article className="appointment">
       <Header
@@ -60,7 +60,7 @@ export default function Appointment(props){
     {mode === SHOW && (
       <Show
         student={props.interview.student}
-        interviewer={props.interview.interviewer.id}
+        interviewer={props.interview.interviewer}
         id={props.id}
         onEdit={() => {transition(EDIT)}}
         onDelete={() => {transition(CONFIRMATION)}}

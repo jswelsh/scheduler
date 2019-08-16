@@ -6,14 +6,14 @@ import "components/Application.scss";
 import Appointment from "./Appointment/Index";
 import useApplicationData from "hooks/useApplicationData";
 
-export default function Application(props) {
+export default function Application() {
   const {
     state,
     setDay,
     bookInterview,
     cancelInterview
   } = useApplicationData();
-
+  console.log(state)
 
   const interviewers = getInterviewersForDay(state, state.day)
   let appointments = getAppointmentsForDay(state, state.day)
