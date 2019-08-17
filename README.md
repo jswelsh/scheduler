@@ -24,3 +24,6 @@ npm run storybook
 ## 
 Week day scheduler that allows a user to book appointments with an interviewer. Each day has 5 available interview blocks and a pool of 5 interviewers. Users can select a day, a block, a interviewer, add their name and create an appointment. This action will update the database with the new appointment. Users are able to edit or remove appointments as well.
 
+![""]https://github.com/jswelsh/scheduler/blob/master/pictures/Screenshot%20from%202019-08-16%2021-31-25.png
+![]https://github.com/jswelsh/scheduler/blob/master/pictures/Screenshot%20from%202019-08-16%2021-31-30.png
+![]https://github.com/jswelsh/scheduler/blob/master/pictures/Screenshot%20from%202019-08-16%2021-31-31.png
