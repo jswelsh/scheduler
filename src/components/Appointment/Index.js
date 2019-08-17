@@ -25,7 +25,7 @@ export default function Appointment(props){
 
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY)
 
-  function save(student, interviewer) {
+  function save(student, interviewer, isAnewAppointment) {
     const interview = {
       student, 
       interviewer// changed
@@ -33,7 +33,7 @@ export default function Appointment(props){
     transition(SAVING)
 
     props
-    .bookInterview(props.id, interview)
+    .bookInterview(props.id, interview, isAnewAppointment)
     .then((error) => {
       if(error){transition(ERROR_SAVE, true)}
       transition(SHOW)
@@ -73,7 +73,7 @@ export default function Appointment(props){
         interviewer={props.interview.interviewer}
         interviewers={props.interviewers}
         onCancel={() => {back()}}
-        onSave={save}
+        onEdit={save}
       />
     )}        
     {mode === CREATE && (

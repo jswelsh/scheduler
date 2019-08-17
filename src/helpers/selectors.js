@@ -3,9 +3,10 @@ export function getAppointmentsForDay(state, day) {
 
   const days = [...state.days]
   const appointments = {...state.appointments}
-  const [dayObj] = days.filter(elt => elt.name == day)
-  if (days[0] && dayObj && dayObj.appointments){
-    return dayObj.appointments.map(x =>appointments[x])
+  const [infoForDay] = days.filter(elt => elt.name === day)
+  //ensure that there is valid days, a day and appointment for day
+  if (days[0] && infoForDay && infoForDay.appointments){
+    return infoForDay.appointments.map(x =>appointments[x])
   }
     return []
   }

@@ -4,34 +4,39 @@ import InterviewerList from "components/InterviewerList.js";
 
 export default function Form(props){
 
-
 const [error, setError] = useState("");
 const [name, setName] = useState(props.name || "");
 const [interviewer, setInterviewer] = useState(props.interviewer || null); //may need to be zero
 function validate() {
+
   if (name === "") {
     setError("Student name cannot be blank");
     return;
+  } else if ((!interviewer)) {
+    setError("Interviewer must be selected");
+    return;
   } 
   setError("")
-  props.onSave(name, interviewer);
+  if(props.onSave){
+    props.onSave(name, interviewer.id, true);
+  } else if (props.onEdit){
+    props.onEdit(name, interviewer.id, false)
+  }
 }
 function cancel () {
-  setName("")
-  props.onCancel()
-  
+
+
+  props.onCancel(interviewer)
 }
 
 const Cancel = { danger:"danger",children:"Cancel", onClick: () => cancel()}
 const Save = { confirm:"confirm", children:"Save", onClick: () => validate()}
-
 
 return (
   <main className="appointment__card appointment__card--create">
     <section className="appointment__card-left">
       <form autoComplete="off" onSubmit={event => event.preventDefault()} >
         <input
-          data-testid="student-name-input"
           className="appointment__create-input text--semi-bold"
           name="name"
           type="text"

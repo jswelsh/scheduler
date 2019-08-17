@@ -13,7 +13,7 @@ export default function Application() {
     bookInterview,
     cancelInterview
   } = useApplicationData();
-  console.log(state)
+
 
   const interviewers = getInterviewersForDay(state, state.day)
   let appointments = getAppointmentsForDay(state, state.day)
@@ -24,8 +24,6 @@ export default function Application() {
     return (
         <Appointment
           key={appointment.id}
-          /* id={appointment.id}
-          time={appointment.time} */
           {...appointment}
           interview={interview}
           interviewers={interviewers}

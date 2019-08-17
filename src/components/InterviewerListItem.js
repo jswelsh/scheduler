@@ -4,7 +4,8 @@ import "components/InterviewerListItem.scss"
 
 export default function InterviewerListItem(props){
 
-  const selected = ( props.interviewer === props.id)
+  const selected = (props.interviewer && props.interviewer.id === props.id)
+
   const itemClass = classnames("interviewers__item", {
     "interviewers__item--selected": selected,
     "interviewers__item-image":props.avatar
@@ -14,8 +15,8 @@ export default function InterviewerListItem(props){
     <div className={itemClass}>
       <img className="interviewers__item-image" 
         src={props.avatar}
-        alt={props.name}
-      />
+        alt={props.name}/>
+      {selected && props.name}
     </div>   
   )
 }
