@@ -24,7 +24,7 @@ export default function InterviewerList(props){
             name={interviewer.name}
             avatar={interviewer.avatar}
             id={interviewer.id}
-            interviewer={props.interviewer}//change like daylistitem
+            interviewer={props.interviewer}
           />
         </li>
       )

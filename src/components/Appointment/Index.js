@@ -26,15 +26,12 @@ export default function Appointment(props){
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY)
 
   function save(student, interviewer, isAnewAppointment) {
-    const interview = {
-      student, 
-      interviewer// changed
-    };
+    const interview = { student, interviewer};
     transition(SAVING)
-
     props
     .bookInterview(props.id, interview, isAnewAppointment)
     .then((error) => {
+      //guard clauses
       if(error){transition(ERROR_SAVE, true)}
       transition(SHOW)
     })
@@ -47,11 +44,12 @@ export default function Appointment(props){
     props
     .cancelInterview(props.id, interview)
     .then((error) => { 
+      //guard clauses
       if(error){transition(ERROR_DELETE, true)}
       transition(EMPTY)
     })
   }
- console.log(props.interview, "helix")
+
   return (
     <article className="appointment">
       <Header

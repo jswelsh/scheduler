@@ -7,11 +7,16 @@ export default function Form(props){
 const [error, setError] = useState("");
 const [name, setName] = useState(props.name || "");
 const [interviewer, setInterviewer] = useState(props.interviewer || null); //may need to be zero
-function validate() {
 
+function cancel () {
+  props.onCancel(interviewer)
+}
+function validate() {
+  //guard clauses
   if (name === "") {
     setError("Student name cannot be blank");
     return;
+  //guard clauses  
   } else if ((!interviewer)) {
     setError("Interviewer must be selected");
     return;
@@ -23,12 +28,6 @@ function validate() {
     props.onEdit(name, interviewer.id, false)
   }
 }
-function cancel () {
-
-
-  props.onCancel(interviewer)
-}
-
 const Cancel = { danger:"danger",children:"Cancel", onClick: () => cancel()}
 const Save = { confirm:"confirm", children:"Save", onClick: () => validate()}
 
